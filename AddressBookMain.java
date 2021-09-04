@@ -36,30 +36,62 @@ public class AddressBookMain {
 	// Edit Contact method
 	private static void editContact() {
 		System.out.println("Enter first name for edit : ");
-		String firstName = sc.nextLine();							
-		for (int i = 0; i < personInfo.size(); i++) {				
-			if (personInfo.get(i).getFirstName().equalsIgnoreCase(firstName)) {		//CHECKING USER INPUT == Array
-				personInfo.remove(i);								//REMOVING ARRAY
-				addContact();										//ADDING NEW ARRAY
+		String firstName = sc.nextLine();
+		for (int i = 0; i < personInfo.size(); i++) {
+			if (personInfo.get(i).getFirstName().equalsIgnoreCase(firstName)) { // Comparing Two Strings
+				personInfo.remove(i); // REMOVING ARRAY
+				addContact(); // ADDING NEW ARRAY
 				System.out.println("Edit Successfully");
 			} else {
 				System.out.println(firstName + " : No Contact found in Address Book");
 			}
 		}
 	}
-	//main method
+
+	// Delete Contact Method
+	private static void deleteContact() {
+		System.out.println("Enter first name for Delete Contact : ");
+		String firstName = sc.nextLine();
+		for (int i = 0; i < personInfo.size(); i++) {
+			if (personInfo.get(i).getFirstName().equalsIgnoreCase(firstName)) { // Comparing Two Strings
+				personInfo.remove(i); // REMOVING ARRAY
+				System.out.println("Contact Deleted...");
+			} else {
+				System.out.println(firstName + " : No Contact found in Address Book");
+			}
+		}
+	}
+
+	private static void showContact() {
+		for (PersonInfo personInfo2 : personInfo) {
+			System.out.println(personInfo2);
+		}
+	}
+
+	// main method
 	public static void main(String[] args) {
 		System.out.println("Welcome To AddressBook");
 		String menuOption;
 		do {
 			System.out.println("	1.Add Contact");
 			System.out.println("	2.Edit Contact");
+			System.out.println("	3.Delete Contact");
+			System.out.println("	4.Show Contact");
 			menuOption = sc.nextLine();
-			if (menuOption.equals("1")) {
+			switch (menuOption) {
+			case "1":
 				addContact();
-			} else if (menuOption.equals("2")) {
+				break;
+			case "2":
 				editContact();
+				break;
+			case "3":
+				deleteContact();
+				break;
+			case "4":
+				showContact();
 			}
+
 		} while (menuOption.equals("0") == false);
 
 	}
