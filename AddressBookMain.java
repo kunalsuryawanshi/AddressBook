@@ -6,10 +6,10 @@ import java.util.Scanner;
 
 public class AddressBookMain {
 	static Scanner sc = new Scanner(System.in);
-	List<PersonInfo> personInfo = new ArrayList<>();
+	static List<PersonInfo> personInfo = new ArrayList<>();
 
 	// Created a method for adding Contacts
-	public void addContact() {
+	public static void addContact() {
 		System.out.print("Enter Your First Name : ");
 		String firstName = sc.next();
 		System.out.print("Enter Your Last Name : ");
@@ -33,17 +33,35 @@ public class AddressBookMain {
 		}
 	}
 
+	// Edit Contact method
+	private static void editContact() {
+		System.out.println("Enter first name for edit : ");
+		String firstName = sc.nextLine();							
+		for (int i = 0; i < personInfo.size(); i++) {				
+			if (personInfo.get(i).getFirstName().equalsIgnoreCase(firstName)) {		//CHECKING USER INPUT == Array
+				personInfo.remove(i);								//REMOVING ARRAY
+				addContact();										//ADDING NEW ARRAY
+				System.out.println("Edit Successfully");
+			} else {
+				System.out.println(firstName + " : No Contact found in Address Book");
+			}
+		}
+	}
+	//main method
 	public static void main(String[] args) {
-
 		System.out.println("Welcome To AddressBook");
-		AddressBookMain addressBook = new AddressBookMain();
-		String choose ="y";
+		String menuOption;
 		do {
-			addressBook.addContact();	
-			System.out.println("You want to add contact Y/N");
-			choose =sc.next();
-		}while(choose.equalsIgnoreCase("y")||choose.equalsIgnoreCase("Y"));
-	
+			System.out.println("	1.Add Contact");
+			System.out.println("	2.Edit Contact");
+			menuOption = sc.nextLine();
+			if (menuOption.equals("1")) {
+				addContact();
+			} else if (menuOption.equals("2")) {
+				editContact();
+			}
+		} while (menuOption.equals("0") == false);
+
 	}
 
 }

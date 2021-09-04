@@ -2,7 +2,7 @@ package com.bridgelabz.addressbook;
 
 public class PersonInfo {
 
-	//Instance Variables
+	// Instance Variables
 	private String firstName;
 	private String lastName;
 	private String address;
@@ -11,10 +11,10 @@ public class PersonInfo {
 	private String zip;
 	private String phoneNumber;
 	private String email;
-	
-	//Constructor for Instance Variable
+
+	// Constructor for Instance Variable
 	public PersonInfo(String firstName, String lastName, String address, String city, String state, String zip,
-					  String phoneNumber, String email) {
+			String phoneNumber, String email) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
@@ -89,8 +89,8 @@ public class PersonInfo {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	//Generated toString method..
+
+	// Generated toString method..
 	@Override
 	public String toString() {
 		return "PersonInfo [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city="
