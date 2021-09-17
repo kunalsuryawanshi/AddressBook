@@ -1,12 +1,11 @@
 package com.bridgelabz.addressbook;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class AddressBookMain {
-	static Scanner sc = new Scanner(System.in);
-	static List<PersonInfo> personInfo = new ArrayList<>();
+	public static Scanner sc = new Scanner(System.in);
+	public static List<PersonInfo> personInfo = new ArrayList<>();
+	public static Map<String, PersonInfo> hashmap = new HashMap<>();
 
 	// Created a method for adding Contacts
 	public static void addContact() {
@@ -33,7 +32,7 @@ public class AddressBookMain {
 		}
 	}
 
-	// Delete Contact Method
+	// UC4 Delete Contact Method
 	private static void deleteContact() {
 		System.out.println("Enter first name for Delete Contact : ");
 		String firstName = sc.nextLine();
@@ -53,36 +52,7 @@ public class AddressBookMain {
 		}
 	}
 
-	// main method
-	public static void main(String[] args) {
-		System.out.println("Welcome To AddressBook");
-		String menuOption;
-		do {
-			System.out.println("	1.Add Contact");
-			System.out.println("	2.Edit Contact");
-			System.out.println("	3.Delete Contact");
-			System.out.println("	4.Show Contact");
-			menuOption = sc.nextLine();
-			switch (menuOption) {
-			case "1":
-				addContact();
-				break;
-			case "2":
-				editContact();
-				break;
-			case "3":
-				deleteContact();
-				break;
-			case "4":
-				showContact();
-			default:
-				System.out.println("Invalid Input");
-			}
-
-		} while (menuOption.equals("0") == false);
-
-	}
-
+	// UC3 editContact
 	private static void editContact() {
 		String enteredName;
 		System.out.println("Enter First name of contact to edit it ");
@@ -133,6 +103,60 @@ public class AddressBookMain {
 				}
 			}
 		}
+
+	}
+
+	/*
+	 * UC7 Ability to ensure there is no Duplicate Entry of the same Person in a
+	 * particular
+	 */
+	private static void duplicateCheck(String firstName) {
+		for (int k = 0; k < personInfo.size(); k++) {
+			String contactName = personInfo.get(k).getFirstName();
+			if (firstName.equals(contactName)) {
+				System.out.println("This Person is Already Present");
+			} else {
+				System.out.println("You can Add this Person");
+				break;
+			}
+		}
+	}
+
+	// main method
+	public static void main(String[] args) {
+		System.out.println("Welcome To AddressBook");
+		String menuOption;
+		do {
+			System.out.println("	1.Add Contact");
+			System.out.println("	2.Edit Contact");
+			System.out.println("	3.Delete Contact");
+			System.out.println("	4.Show Contact");
+			System.out.println("	5.Duplicate Check");
+			menuOption = sc.nextLine();
+			switch (menuOption) {
+			case "1":
+				addContact();
+				break;
+			case "2":
+				editContact();
+				break;
+			case "3":
+				deleteContact();
+				break;
+			case "4":
+				showContact();
+				break;
+			case "5":
+				System.out.println(
+						"Enter the Name of the Person You Wants to Check, weather that person is present or not");
+				String name = sc.nextLine();
+				duplicateCheck(name);
+				break;
+			default:
+				System.out.println("Invalid Input");
+			}
+
+		} while (menuOption.equals("0") == false);
 
 	}
 
