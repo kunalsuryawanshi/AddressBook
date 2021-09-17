@@ -33,21 +33,6 @@ public class AddressBookMain {
 		}
 	}
 
-	// Edit Contact method
-	private static void editContact() {
-		System.out.println("Enter first name for edit : ");
-		String firstName = sc.nextLine();
-		for (int i = 0; i < personInfo.size(); i++) {
-			if (personInfo.get(i).getFirstName().equalsIgnoreCase(firstName)) { // Comparing Two Strings
-				personInfo.remove(i); // REMOVING ARRAY
-				addContact(); // ADDING NEW ARRAY
-				System.out.println("Edit Successfully");
-			} else {
-				System.out.println(firstName + " : No Contact found in Address Book");
-			}
-		}
-	}
-
 	// Delete Contact Method
 	private static void deleteContact() {
 		System.out.println("Enter first name for Delete Contact : ");
@@ -90,9 +75,64 @@ public class AddressBookMain {
 				break;
 			case "4":
 				showContact();
+			default:
+				System.out.println("Invalid Input");
 			}
 
 		} while (menuOption.equals("0") == false);
+
+	}
+
+	private static void editContact() {
+		String enteredName;
+		System.out.println("Enter First name of contact to edit it ");
+		enteredName = sc.next();
+		for (int i = 0; i < personInfo.size(); i++) {
+			if (personInfo.get(i).getFirstName().equals(enteredName)) {
+				int check = 0;
+				System.out.println("Person found , what do you want to edit ?");
+				System.out.println(
+						"Enter\n1.First Name\n2.Last Name\n3.Address\n4.city\n5.State\n6.Zip\n7.Phone\n8.Email");
+				check = sc.nextInt();
+				switch (check) {
+				case 1:
+					System.out.println("Enter new first name");
+					personInfo.get(i).setFirstName(sc.next());
+					break;
+				case 2:
+					System.out.println("Enter new last name");
+					personInfo.get(i).setLastName(sc.next());
+					break;
+				case 3:
+					System.out.println("Enter new Address");
+					personInfo.get(i).setAddress(sc.next());
+					break;
+				case 4:
+					System.out.println("Enter new city");
+					personInfo.get(i).setCity(sc.next());
+					break;
+				case 5:
+					System.out.println("Enter new state");
+					personInfo.get(i).setState(sc.next());
+					break;
+				case 6:
+					System.out.println("Enter new zip");
+					personInfo.get(i).setZip(sc.next());
+					break;
+				case 7:
+					System.out.println("Enter new phone number");
+					personInfo.get(i).setPhoneNumber(sc.next());
+					break;
+				case 8:
+					System.out.println("Enter new email");
+					personInfo.get(i).setEmail(sc.next());
+					break;
+				default:
+					System.out.println("Invalid Entry");
+
+				}
+			}
+		}
 
 	}
 

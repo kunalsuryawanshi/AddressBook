@@ -89,7 +89,7 @@ public class PersonInfo {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
 	// Generated toString method..
 	@Override
 	public String toString() {
