@@ -2,6 +2,7 @@ package com.bridgelabz.addressbook;
 
 public class PersonInfo {
 
+
     // Instance Variables
     private String firstName;
     private String lastName;

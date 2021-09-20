@@ -1,6 +1,7 @@
 package com.bridgelabz.addressbook;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class AddressBookMain {
     public static Scanner sc = new Scanner(System.in);
@@ -36,16 +37,16 @@ public class AddressBookMain {
         }
     }
 
-    // UC4 Delete Contact Method
+    // UC4 Delete PersonInfo Method
     public static void deleteContact() {
-        System.out.println("Enter first name for Delete Contact : ");
+        System.out.println("Enter first name for Delete PersonInfo : ");
         String firstName = sc.nextLine();
         for (int i = 0; i < personInfo.size(); i++) {
             if (personInfo.get(i).getFirstName().equalsIgnoreCase(firstName)) { // Comparing Two Strings
                 personInfo.remove(i); // REMOVING ARRAY
-                System.out.println("Contact Deleted...");
+                System.out.println("PersonInfo Deleted...");
             } else {
-                System.out.println(firstName + " : No Contact found in Address Book");
+                System.out.println(firstName + " : No PersonInfo found in Address Book");
             }
         }
     }
@@ -122,6 +123,13 @@ public class AddressBookMain {
         return result;
     }
 
+    public static void searchPersonByName(String firstName) {
+        //UC8 Ability to search Person in a City or State across the multiple AddressBook
+        List listPerson = (List) personInfo.stream()
+                .filter(p -> p.getFirstName().equals(firstName)).collect(Collectors.toList());
+        System.out.println(listPerson);
+    }
+
     public static void menu() {
         String menuOption;
         do {
@@ -129,6 +137,7 @@ public class AddressBookMain {
             System.out.println("	2.Edit Contact");
             System.out.println("	3.Delete Contact");
             System.out.println("	4.Show Contact");
+            System.out.println("	5.Search Person Using Name");
             menuOption = sc.nextLine();
             switch (menuOption) {
                 case "1":
@@ -143,6 +152,10 @@ public class AddressBookMain {
                 case "4":
                     showContact();
                     break;
+                case "5":
+                    System.out.println("Enter First Name");
+                    String firstname = sc.next();
+                    searchPersonByName(firstname);
                 default:
                     System.out.println("Invalid Input");
             }
