@@ -123,21 +123,24 @@ public class AddressBookMain {
         return result;
     }
 
+    //UC8 Ability to search Person in a City or State across the multiple AddressBook
     public static void searchPersonByName(String firstName) {
-        //UC8 Ability to search Person in a City or State across the multiple AddressBook
         List listPerson = (List) personInfo.stream()
                 .filter(p -> p.getFirstName().equals(firstName)).collect(Collectors.toList());
-        System.out.println(listPerson);
+        for (Object number : listPerson) {
+            System.out.println(number);
+        }
     }
 
     public static void menu() {
         String menuOption;
         do {
-            System.out.println("	1.Add Contact");
+            System.out.println("    1.Add Contact");
             System.out.println("	2.Edit Contact");
             System.out.println("	3.Delete Contact");
             System.out.println("	4.Show Contact");
             System.out.println("	5.Search Person Using Name");
+
             menuOption = sc.nextLine();
             switch (menuOption) {
                 case "1":
@@ -156,6 +159,7 @@ public class AddressBookMain {
                     System.out.println("Enter First Name");
                     String firstname = sc.next();
                     searchPersonByName(firstname);
+                    break;
                 default:
                     System.out.println("Invalid Input");
             }
