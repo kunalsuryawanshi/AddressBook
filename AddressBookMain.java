@@ -2,6 +2,7 @@ package com.bridgelabz.addressbook;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AddressBookMain {
     public static Scanner sc = new Scanner(System.in);
@@ -122,24 +123,35 @@ public class AddressBookMain {
         }
         return result;
     }
+
     //UC8 Ability to search Person in a City or State across the multiple AddressBook
     public static void searchPersonByName(String firstName) {
         List listPerson = (List) personInfo.stream()
                 .filter(p -> p.getFirstName().equals(firstName)).collect(Collectors.toList());
-        for (Object person:listPerson)
-        {
+        for (Object person : listPerson) {
             System.out.println(person);
         }
     }
+
     //UC9 Ability to search Person in a City or State across the multiple AddressBook
     public static void searchPersonByCity(String City) {
         List listPerson = (List) personInfo.stream()
                 .filter(p -> p.getCity().equals(City)).collect(Collectors.toList());
-        for (Object person:listPerson)
-        {
+        for (Object person : listPerson) {
             System.out.println(person);
         }
     }
+
+    //UC10 Ability to search Person in a City or State
+    public static void getCountByCity(String city) {
+        List listPerson = (List) personInfo.stream()
+                .filter(p -> p.getCity().equals(city))
+                .collect(Collectors.toList());
+        long total=0;
+        total= Stream.of(listPerson).count();
+        System.out.println("Totally "+total+ " contacts present in the AddressBook");
+    }
+
     public static void menu() {
         String menuOption;
         do {
@@ -149,6 +161,7 @@ public class AddressBookMain {
             System.out.println("	4.Show Contact");
             System.out.println("	5.Search Person Using Name");
             System.out.println("	6.Search Person Using City");
+            System.out.println("	7.Number Of Contact Person");
 
             menuOption = sc.nextLine();
             switch (menuOption) {
@@ -174,6 +187,10 @@ public class AddressBookMain {
                     String city = sc.next();
                     searchPersonByCity(city);
                     break;
+                case "7":
+                    System.out.println("Enter City Name");
+                    String cityCount = sc.next();
+                    getCountByCity(cityCount);
                 default:
                     System.out.println("Invalid Input");
             }
