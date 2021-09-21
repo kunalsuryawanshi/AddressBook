@@ -125,8 +125,10 @@ public class AddressBookMain {
 
     //UC8 Ability to search Person in a City or State across the multiple AddressBook
     public static void searchPersonByName(String firstName) {
+        //Defined List
         List listPerson = (List) personInfo.stream()
                 .filter(p -> p.getFirstName().equals(firstName)).collect(Collectors.toList());
+        //Printing List here
         for (Object number : listPerson) {
             System.out.println(number);
         }
@@ -140,6 +142,7 @@ public class AddressBookMain {
             System.out.println("	3.Delete Contact");
             System.out.println("	4.Show Contact");
             System.out.println("	5.Search Person Using Name");
+            System.out.println("	0.Quit");
 
             menuOption = sc.nextLine();
             switch (menuOption) {
