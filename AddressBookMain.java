@@ -162,6 +162,7 @@ public class AddressBookMain {
             System.out.println("	5.Search Person Using Name");
             System.out.println("	6.Search Person Using City");
             System.out.println("	7.Number Of Contact Person");
+            System.out.println("	0.Exit");
 
             menuOption = sc.nextLine();
             switch (menuOption) {
