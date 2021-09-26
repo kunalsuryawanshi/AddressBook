@@ -176,7 +176,7 @@ public class AddressBookMain {
     }
     /*
     * UC12
-    * Ability to sort the entries in the address book by City, State, or Zip - Write functions to sort
+    * Ability to sort the entries in the address book by City, State, or Zip
     */
     private static void sortByChoose() {
         System.out.println("1. Sort By City Name\n2.Sort By State\n3.Sort By Zip");
