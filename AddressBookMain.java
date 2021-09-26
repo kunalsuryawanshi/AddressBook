@@ -21,17 +21,17 @@ public class AddressBookMain {
             menu();
         } else
             System.out.print("Enter Your Address : ");
-        String address = sc.next();
-        System.out.print("Enter Your City : ");
-        String city = sc.next();
-        System.out.print("Enter Your State : ");
-        String state = sc.next();
-        System.out.print("Enter Your Zip Code : ");
-        String zipCode = sc.next();
-        System.out.print("Enter Your Email : ");
-        String email = sc.next();
-        System.out.print("Enter Your Phone Number : ");
-        String phoneNo = sc.next();
+            String address = sc.next();
+            System.out.print("Enter Your City : ");
+            String city = sc.next();
+            System.out.print("Enter Your State : ");
+            String state = sc.next();
+            System.out.print("Enter Your Zip Code : ");
+            String zipCode = sc.next();
+            System.out.print("Enter Your Email : ");
+            String email = sc.next();
+            System.out.print("Enter Your Phone Number : ");
+            String phoneNo = sc.next();
         PersonInfo person = new PersonInfo(firstName, lastName, address, city, state, zipCode, email, phoneNo);
         personInfo.add(person);
         for (PersonInfo personInfo2 : personInfo) {
@@ -104,14 +104,16 @@ public class AddressBookMain {
                         break;
                     default:
                         System.out.println("Invalid Entry");
-
                 }
+            }else{
+                System.out.println("Person Not Found");
             }
         }
 
     }
-
-    //UC7 Ability to ensure there is no Duplicate Entry of the same Person
+    /*
+     * UC7 Ability to ensure there is no Duplicate Entry of the same Person
+     */
     private static boolean checkExist(String firstName, String lastName, List<PersonInfo> personInfo) {
         boolean result = false;
         for (PersonInfo check : personInfo) {
@@ -172,6 +174,54 @@ public class AddressBookMain {
                     //Collecting as a list
         listPerson.forEach(System.out::println);
     }
+    /*
+    * UC12
+    * Ability to sort the entries in the address book by City, State, or Zip - Write functions to sort
+    */
+    private static void sortByChoose() {
+        System.out.println("1. Sort By City Name\n2.Sort By State\n3.Sort By Zip");
+        int Choose= sc.nextInt();
+        switch (Choose) {
+            case 1:
+                sortByCity();
+                break;
+            case 2:
+                sortByState();
+                break;
+            case 3:
+                sortByZip();
+                break;
+            default:
+                System.out.println("Invalid Input");
+        }
+    }
+
+    private static void sortByZip() {
+        List listPerson = personInfo.stream()
+                .sorted(Comparator.comparing(PersonInfo::getZip))
+                    //Sorting data
+                .collect(Collectors.toList());
+                    //Collecting as a list
+        listPerson.forEach(System.out::println);
+    }
+
+    private static void sortByState() {
+        List listPerson = personInfo.stream()
+                .sorted(Comparator.comparing(PersonInfo::getState))
+                    //Sorting data
+                .collect(Collectors.toList());
+                    //Collecting as a list
+        listPerson.forEach(System.out::println);
+    }
+
+    private static void sortByCity() {
+        List listPerson = personInfo.stream()
+                .sorted(Comparator.comparing(PersonInfo::getCity))
+                    //Sorting data
+                .collect(Collectors.toList());
+                    //Collecting as a list
+        listPerson.forEach(System.out::println);
+    }
 
     public static void menu() {
         String menuOption;
@@ -184,8 +234,8 @@ public class AddressBookMain {
             System.out.println("	6.Search Person Using City");
             System.out.println("	7.Number Of Contact Person");
             System.out.println("	8.Sort Person By Name");
+            System.out.println("	9.Sort Person By City, State or Zip");
             System.out.println("	0.Exit");
-
             menuOption = sc.nextLine();
             switch (menuOption) {
                 case "1":
@@ -218,17 +268,19 @@ public class AddressBookMain {
                 case "8":
                     sortByName();
                     break;
+                case "9":
+                    sortByChoose();
+                    break;
                 default:
                     System.out.println("Invalid Input");
+                    break;
             }
-
         } while (menuOption.equals("0") == false);
 
     }
 
     // main method
     public static void main(String[] args) {
-        AddressBookMain book = new AddressBookMain();
         System.out.println("Welcome To AddressBook");
         menu();
     }
