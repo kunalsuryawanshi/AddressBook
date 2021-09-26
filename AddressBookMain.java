@@ -1,6 +1,7 @@
 package com.bridgelabz.addressbook;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -53,10 +54,7 @@ public class AddressBookMain {
     }
 
     public static void showContact() {
-        for (int i = 0; i < personInfo.size(); i++) {
-            hashmap.put(personInfo.get(i).getPhoneNumber(), personInfo);
-            System.out.println(hashmap.toString());
-        }
+        personInfo.forEach(System.out::println);
     }
 
     // UC3 editContact
@@ -64,8 +62,8 @@ public class AddressBookMain {
         String enteredName;
         System.out.println("Enter First name of contact to edit it ");
         enteredName = sc.next();
-        for (int i = 0; i < personInfo.size(); i++) {
-            if (personInfo.get(i).getFirstName().equals(enteredName)) {
+        for (int index = 0; index < personInfo.size(); index++) {
+            if (personInfo.get(index).getFirstName().equals(enteredName)) {
                 int check = 0;
                 System.out.println("Person found , what do you want to edit ?");
                 System.out.println(
@@ -74,35 +72,35 @@ public class AddressBookMain {
                 switch (check) {
                     case 1:
                         System.out.println("Enter new first name");
-                        personInfo.get(i).setFirstName(sc.nextLine());
+                        personInfo.get(index).setFirstName(sc.nextLine());
                         break;
                     case 2:
                         System.out.println("Enter new last name");
-                        personInfo.get(i).setLastName(sc.nextLine());
+                        personInfo.get(index).setLastName(sc.nextLine());
                         break;
                     case 3:
                         System.out.println("Enter new Address");
-                        personInfo.get(i).setAddress(sc.nextLine());
+                        personInfo.get(index).setAddress(sc.nextLine());
                         break;
                     case 4:
                         System.out.println("Enter new city");
-                        personInfo.get(i).setCity(sc.nextLine());
+                        personInfo.get(index).setCity(sc.nextLine());
                         break;
                     case 5:
                         System.out.println("Enter new state");
-                        personInfo.get(i).setState(sc.nextLine());
+                        personInfo.get(index).setState(sc.nextLine());
                         break;
                     case 6:
                         System.out.println("Enter new zip");
-                        personInfo.get(i).setZip(sc.nextLine());
+                        personInfo.get(index).setZip(sc.nextLine());
                         break;
                     case 7:
                         System.out.println("Enter new phone number");
-                        personInfo.get(i).setPhoneNumber(sc.next());
+                        personInfo.get(index).setPhoneNumber(sc.nextLine());
                         break;
                     case 8:
                         System.out.println("Enter new email");
-                        personInfo.get(i).setEmail(sc.nextLine());
+                        personInfo.get(index).setEmail(sc.nextLine());
                         break;
                     default:
                         System.out.println("Invalid Entry");
@@ -124,32 +122,55 @@ public class AddressBookMain {
         return result;
     }
 
-    //UC8 Ability to search Person in a City or State across the multiple AddressBook
+    /*
+     *UC8
+     *Ability to search Person in a City or State across the multiple AddressBook
+     */
     public static void searchPersonByName(String firstName) {
         List listPerson = (List) personInfo.stream()
-                .filter(p -> p.getFirstName().equals(firstName)).collect(Collectors.toList());
-        for (Object person : listPerson) {
-            System.out.println(person);
-        }
-    }
-
-    //UC9 Ability to search Person in a City or State across the multiple AddressBook
-    public static void searchPersonByCity(String City) {
-        List listPerson = (List) personInfo.stream()
-                .filter(p -> p.getCity().equals(City)).collect(Collectors.toList());
-        for (Object person : listPerson) {
-            System.out.println(person);
-        }
-    }
-
-    //UC10 Ability to search Person in a City or State
-    public static void getCountByCity(String city) {
-        List listPerson = (List) personInfo.stream()
-                .filter(p -> p.getCity().equals(city))
+                .filter(p -> p.getFirstName().equals(firstName))
                 .collect(Collectors.toList());
-        long total=0;
-        total= Stream.of(listPerson).count();
-        System.out.println("Totally "+total+ " contacts present in the AddressBook");
+        listPerson.forEach(System.out::println);
+    }
+
+    /*
+     *UC9
+     *Ability to search Person in a City or State across the multiple AddressBook
+     *:: -> Method Reference
+     */
+    public static void searchPersonByCity(String City) {
+        List listPerson = personInfo.stream()
+                .filter(p -> p.getCity().equals(City))
+                //filtering Data
+                .collect(Collectors.toList());
+        listPerson.forEach(System.out::println);
+    }
+
+    /*
+     *UC10 Ability to search Person in a City or State
+     */
+    public static void getCountByCity(String city) {
+        List listPerson = personInfo.stream()
+                .filter(p -> p.getCity().equals(city))
+                //filtering Data
+                .collect(Collectors.toList());
+                //Collecting as a list
+        long total = 0;
+        total = Stream.of(listPerson).count();
+        System.out.println("Totally " + total + " contacts present in the AddressBook");
+    }
+
+    /*
+     * UC11
+     * Ability to sort the entries in the address book alphabetically by Person’s name
+     */
+    public static void sortByName() {
+        List listPerson = personInfo.stream()
+                .sorted(Comparator.comparing(PersonInfo::getFirstName))
+                    //Sorting data
+                .collect(Collectors.toList());
+                    //Collecting as a list
+        listPerson.forEach(System.out::println);
     }
 
     public static void menu() {
@@ -162,6 +183,8 @@ public class AddressBookMain {
             System.out.println("	5.Search Person Using Name");
             System.out.println("	6.Search Person Using City");
             System.out.println("	7.Number Of Contact Person");
+            System.out.println("	8.Sort Person By Name");
+            System.out.println("	0.Exit");
 
             menuOption = sc.nextLine();
             switch (menuOption) {
@@ -191,6 +214,10 @@ public class AddressBookMain {
                     System.out.println("Enter City Name");
                     String cityCount = sc.next();
                     getCountByCity(cityCount);
+                    break;
+                case "8":
+                    sortByName();
+                    break;
                 default:
                     System.out.println("Invalid Input");
             }
