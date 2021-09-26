@@ -141,7 +141,7 @@ public class AddressBookMain {
     public static void searchPersonByCity(String City) {
         List listPerson = personInfo.stream()
                 .filter(p -> p.getCity().equals(City))
-                //filtering Data
+                    //filtering Data
                 .collect(Collectors.toList());
         listPerson.forEach(System.out::println);
     }
@@ -152,9 +152,9 @@ public class AddressBookMain {
     public static void getCountByCity(String city) {
         List listPerson = personInfo.stream()
                 .filter(p -> p.getCity().equals(city))
-                //filtering Data
+                    //filtering Data
                 .collect(Collectors.toList());
-                //Collecting as a list
+                    //Collecting as a list
         long total = 0;
         total = Stream.of(listPerson).count();
         System.out.println("Totally " + total + " contacts present in the AddressBook");
