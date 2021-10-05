@@ -1,5 +1,6 @@
 package com.bridgelabz.addressbook;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -253,6 +254,20 @@ public class AddressBookMain {
                 case "8":
                     sortAddressBook();
                     break;
+                case "9":
+                    FileIO fileIO = new FileIO();
+                        try {
+                            fileIO.writeFile(personInfo);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                case "10":
+                    FileIO fileIORead = new FileIO();
+                    try {
+                        fileIORead.readFile();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 default:
                     System.out.println("Invalid Input");
                     break;
