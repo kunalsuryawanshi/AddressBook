@@ -12,9 +12,9 @@ public class FileIO {
          *Surrounded with try catch because it will be throws IO Exception
          */
         try {
-/*
- * if file doesn't Exist it will create new file...
- */
+            /*
+             * if file doesn't Exist it will create new file...
+             */
             if (!file.exists()) {
                 file.createNewFile();
                 System.out.println("File Created Successfully..!");
@@ -32,8 +32,8 @@ public class FileIO {
     public static void readFile() throws IOException {
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-            String data;
-            while ((data = bufferedReader.readLine()) !=null){
+            String data = bufferedReader.readLine();
+            while ((data) != null) {
                 System.out.println(data);
             }
         } catch (IOException e) {

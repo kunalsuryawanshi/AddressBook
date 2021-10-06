@@ -221,6 +221,8 @@ public class AddressBookMain {
             System.out.println("	6.Search Person Using City");
             System.out.println("	7.Number Of Contact Person");
             System.out.println("	8.Sort Address Book");
+            System.out.println("	9.Save In Text File");
+            System.out.println("	10.Read From Text File");
             System.out.println("	0.Exit");
             menuOption = sc.nextLine();
             switch (menuOption) {
