@@ -7,14 +7,12 @@ public class FileIO {
     //Defined file path static because we can use File Path all The Methods
     static File file = new File("F:/Core Java/src/com/bridgelabz/addressbook/addressbook.txt");
 
+    /*
+     * @pram personInfo : Contact List
+     * Contact List return in txt File
+     */
     public void writeFile(List<PersonInfo> personInfo) throws IOException {
-        /*
-         *Surrounded with try catch because it will be throws IO Exception
-         */
         try {
-            /*
-             * if file doesn't Exist it will create new file...
-             */
             if (!file.exists()) {
                 file.createNewFile();
                 System.out.println("File Created Successfully..!");
@@ -29,6 +27,9 @@ public class FileIO {
         }
     }
 
+    /*
+     * Read Contacts From Txt File
+     */
     public static void readFile() throws IOException {
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
