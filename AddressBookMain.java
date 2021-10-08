@@ -1,5 +1,7 @@
 package com.bridgelabz.addressbook;
 
+import com.opencsv.exceptions.CsvValidationException;
+
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -21,17 +23,17 @@ public class AddressBookMain {
             menu();
         } else
             System.out.print("Enter Your Address : ");
-            String address = sc.next();
-            System.out.print("Enter Your City : ");
-            String city = sc.next();
-            System.out.print("Enter Your State : ");
-            String state = sc.next();
-            System.out.print("Enter Your Zip Code : ");
-            String zipCode = sc.next();
-            System.out.print("Enter Your Email : ");
-            String email = sc.next();
-            System.out.print("Enter Your Phone Number : ");
-            String phoneNo = sc.next();
+        String address = sc.next();
+        System.out.print("Enter Your City : ");
+        String city = sc.next();
+        System.out.print("Enter Your State : ");
+        String state = sc.next();
+        System.out.print("Enter Your Zip Code : ");
+        String zipCode = sc.next();
+        System.out.print("Enter Your Email : ");
+        String email = sc.next();
+        System.out.print("Enter Your Phone Number : ");
+        String phoneNo = sc.next();
         PersonInfo person = new PersonInfo(firstName, lastName, address, city, state, zipCode, email, phoneNo);
         personInfo.add(person);
         for (PersonInfo personInfo2 : personInfo) {
@@ -111,6 +113,7 @@ public class AddressBookMain {
         }
 
     }
+
     /*
      * UC7 Ability to ensure there is no Duplicate Entry of the same Person
      */
@@ -143,7 +146,7 @@ public class AddressBookMain {
     public static void searchPersonByCity(String City) {
         List listPerson = personInfo.stream()
                 .filter(p -> p.getCity().equals(City))
-                    //filtering Data
+                //filtering Data
                 .collect(Collectors.toList());
         listPerson.forEach(System.out::println);
     }
@@ -154,13 +157,14 @@ public class AddressBookMain {
     public static void getCountByCity(String city) {
         List listPerson = personInfo.stream()
                 .filter(p -> p.getCity().equals(city))
-                    //filtering Data
+                //filtering Data
                 .collect(Collectors.toList());
-                    //Collecting as a list
+        //Collecting as a list
         long total = 0;
         total = Stream.of(listPerson).count();
         System.out.println("Totally " + total + " contacts present in the AddressBook");
     }
+
     /*
      * UC11
      * Ability to sort the entries in the address book alphabetically by Person’s name
@@ -223,6 +227,10 @@ public class AddressBookMain {
             System.out.println("	8.Sort Address Book");
             System.out.println("	9.Save In Text File");
             System.out.println("	10.Read From Text File");
+            System.out.println("	11.Write In CSV File");
+            System.out.println("	12.Read From CSV File");
+            System.out.println("	13.Write in JSON");
+            System.out.println("	14.Read From JSON");
             System.out.println("	0.Exit");
             menuOption = sc.nextLine();
             switch (menuOption) {
@@ -258,11 +266,12 @@ public class AddressBookMain {
                     break;
                 case "9":
                     FileIO fileIO = new FileIO();
-                        try {
-                            fileIO.writeFile(personInfo);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                    try {
+                        fileIO.writeFile(personInfo);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
                 case "10":
                     FileIO fileIORead = new FileIO();
                     try {
@@ -270,6 +279,39 @@ public class AddressBookMain {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    break;
+                case "11":
+                    CSV csvWrite = new CSV();
+                    try {
+                        csvWrite.writeCSV(personInfo);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "12":
+                    CSV csvRead = new CSV();
+                    try {
+                        csvRead.readCSV();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "13":
+                    JSON jsonWrite = new JSON();
+                    try {
+                        jsonWrite.writeJson(personInfo);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case"14":
+                    JSON jsonRead = new JSON();
+                    try{
+                        jsonRead.readJson();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    break;
                 default:
                     System.out.println("Invalid Input");
                     break;
